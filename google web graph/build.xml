@@ -1,0 +1,31 @@
+<project>
+  <target name="clean">
+    <delete dir="build"/>
+  </target>
+  <target name="compile">
+    <mkdir dir="build/classes"/>
+    <javac srcdir="src" destdir="build/classes">
+      <compilerarg value="-Xlint:unchecked"/>
+    </javac>
+  </target>
+  <target name="jar"
+          depends="compile">
+    <mkdir dir="build/jar"/>
+    <jar destfile="build/jar/Converter.jar"
+         basedir="build/classes">
+      <manifest>
+        <attribute name="Main-Class"
+                   value="me.tool.gwebneo4j.Converter"/>
+      </manifest>
+    </jar>
+  </target>
+  <target name="run"
+          depends="jar">
+    <java jar="build/jar/Converter.jar" fork="true"/>
+  </target>
+  <target name="doc">
+    <mkdir dir="build/doc"/>
+    <javadoc sourcepath="src"
+             destdir="build/doc"/>
+  </target>
+</project>
